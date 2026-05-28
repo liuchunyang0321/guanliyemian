@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>电科院用能所 · 数字产品矩阵 | 智能能源管理解决方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: radial-gradient(ellipse at 50% 30%, #1a2a4a, #0a0e27);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* 动态星星背景 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            box-shadow: 0 0 4px rgba(0, 216, 255, 0.5);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* 动态网格线条 */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(0deg, rgba(0, 216, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 216, 255, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: moveGrid 25s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(60px); }
+        }
+
+        /* 动态光晕背景 */
+        .aurora-bg {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .aurora {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: floatAurora 12s ease-in-out infinite;
+        }
+
+        .aurora-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 216, 255, 0.6), transparent);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .aurora-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.4), transparent);
+            top: 50%;
+            right: 5%;
+            animation-delay: 4s;
+        }
+
+        .aurora-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 150, 255, 0.5), transparent);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 8s;
+        }
+
+        @keyframes floatAurora {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(50px, -50px); }
+            50% { transform: translate(0, 100px); }
+            75% { transform: translate(-50px, 50px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            width: 100%;
+        }
+
+        /* 标题区域 - 增强科技感 */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 4px;
+            background: linear-gradient(90deg, #00ffff, #00d8ff, #0099ff, #00d8ff, #00ffff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glowText 4s ease-in-out infinite, shimmer 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(0, 216, 255, 0.5)) drop-shadow(0 0 30px rgba(0, 216, 255, 0.3));
+        }
+
+        @keyframes glowText {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(0, 216, 255, 0.4)) drop-shadow(0 0 40px rgba(0, 216, 255, 0.2));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(0, 216, 255, 0.7)) drop-shadow(0 0 60px rgba(0, 216, 255, 0.4));
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 400% 0; }
+            100% { background-position: -400% 0; }
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #b0c4de;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 卡片网格 */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .module-card {
+            position: relative;
+            height: 310px;
+            background: linear-gradient(135deg, rgba(20, 30, 60, 0.5), rgba(10, 20, 45, 0.6));
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, rgba(0, 216, 255, 0.6), rgba(0, 150, 255, 0.4), rgba(0, 216, 255, 0.6)) 1;
+            border-radius: 12px;
+            padding: 30px 30px 48px 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: cardFadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .module-card:nth-child(1) { animation-delay: 0.2s; }
+        .module-card:nth-child(2) { animation-delay: 0.4s; }
+        .module-card:nth-child(3) { animation-delay: 0.6s; }
+        .module-card:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 216, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+
+        .module-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            background: linear-gradient(135deg, rgba(20, 30, 60, 0.7), rgba(10, 20, 45, 0.8));
+            box-shadow: 
+                0 0 20px rgba(0, 216, 255, 0.4),
+                0 0 40px rgba(0, 216, 255, 0.2),
+                inset 0 0 20px rgba(0, 216, 255, 0.1),
+                0 0 60px rgba(0, 216, 255, 0.15);
+        }
+
+        .module-card:hover::before {
+            left: 100%;
+        }
+
+        .module-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: floatIcon 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(0, 216, 255, 0.3));
+        }
+
+        .module-card:hover .module-icon {
+            transform: scale(1.3) rotate(15deg);
+            filter: drop-shadow(0 0 15px rgba(0, 216, 255, 0.6));
+            animation: none;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .module-name {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ffffff, #e0f7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .module-description {
+            font-size: 0.95em;
+            color: #a0b8d8;
+            margin-bottom: 22px;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .module-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #00ffff, #00d8ff, #0099ff);
+            background-size: 200% 200%;
+            color: #000;
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95em;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: visible;
+            white-space: nowrap;
+            min-height: 44px;
+            margin-bottom: 0;
+            align-self: flex-start;
+            box-shadow: 
+                0 0 10px rgba(0, 255, 255, 0.4),
+                inset 0 0 10px rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .module-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .module-action::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .module-action:hover {
+            background: linear-gradient(135deg, #00ffff, #0099ff, #00d8ff);
+            background-position: 200% 0;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 40px rgba(0, 216, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: scale(1.08) translateY(-2px);
+            text-shadow: 0 0 10px rgba(0, 216, 255, 0.5);
+        }
+
+        .module-action:hover::before {
+            left: 100%;
+        }
+
+        .module-action:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* 加载动画 */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(20, 40, 80, 0.95), rgba(10, 14, 39, 0.98));
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loader {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top-color: #00ffff;
+            border-right-color: #0099ff;
+            border-bottom-color: #00d8ff;
+            border-radius: 50%;
+            animation: rotate 1s linear infinite;
+            box-shadow: 0 0 20px rgba(0, 216, 255, 0.7), inset 0 0 20px rgba(0, 216, 255, 0.3);
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            border: 2px solid transparent;
+            border-top-color: rgba(0, 255, 255, 0.5);
+            border-left-color: rgba(0, 150, 255, 0.5);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotateReverse 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateReverse {
+            to { transform: translate(-50%, -50%) rotate(-360deg); }
+        }
+
+        .loader-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.9em;
+            color: #00ffff;
+            white-space: nowrap;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 216, 255, 0.8);
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.85em;
+            color: #667890;
+            margin-top: auto;
+            border-top: 1px solid rgba(0, 216, 255, 0.15);
+        }
+
+        /* 响应式设计 - 平板 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2em;
+                margin-bottom: 15px;
+            }
+
+            .header p {
+                font-size: 0.95em;
+            }
+
+            .header {
+                margin-bottom: 50px;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .module-card {
+                height: 290px;
+                padding: 24px 24px 44px 24px;
+            }
+
+            .module-icon {
+                font-size: 2.8em;
+            }
+
+            .module-name {
+                font-size: 1.4em;
+            }
+
+            .module-description {
+                font-size: 0.9em;
+                margin-bottom: 18px;
+            }
+            
+            .module-action {
+                padding: 12px 24px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* 手机端精细调整 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+                margin-bottom: 10px;
+            }
+
+            .header {
+                margin-bottom: 30px;
+            }
+
+            .modules-grid {
+                gap: 20px;
+            }
+
+            .module-card {
+                height: 270px;
+                padding: 20px 20px 40px 20px;
+            }
+
+            .module-icon {
+                font-size: 2.2em;
+                margin-bottom: 10px;
+            }
+
+            .module-name {
+                font-size: 1.2em;
+            }
+
+            .module-description {
+                font-size: 0.85em;
+                margin-bottom: 16px;
+            }
+            
+            .module-action {
+                padding: 10px 20px;
+                font-size: 0.85em;
+                min-height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 动态背景 -->
+    <div class="grid-bg"></div>
+    <div class="aurora-bg">
+        <div class="aurora aurora-1"></div>
+        <div class="aurora aurora-2"></div>
+        <div class="aurora aurora-3"></div>
+    </div>
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <!-- 标题区域 -->
+        <div class="header">
+            <h1>电科院用能所 · 数字产品矩阵</h1>
+            <p>☆ 智能能源管理解决方案 ☆</p>
+        </div>
+
+        <!-- 模块卡片网格 -->
+        <div class="modules-grid">
+            <!-- 经验成果库 -->
+            <div class="module-card" data-module="经验成果库" data-url="https://www.baidu.com">
+                <div>
+                    <div class="module-icon">📚</div>
+                    <div class="module-name">经验成果库</div>
+                    <div class="module-description">汇聚领域专家经验，提供可复用的项目方案和最佳实践</div>
+                </div>
+                <button class="module-action">进入系统</button>
+            </div>
+
+            <!-- 气象工具箱 -->
+            <div class="module-card" data-module="气象工具箱" data-url="https://www.jd.com">
+                <div>
+                    <div class="module-icon">🌦️</div>
+                    <div class="module-name">气象工具箱</div>
+                    <div class="module-description">实时气象数据分析，支持精准的能源预测和规划</div>
+                </div>
+                <button class="module-action">进入系统</button>
+            </div>
+
+            <!-- 智能工具 -->
+            <div class="module-card" data-module="智能工具" data-url="https://www.taobao.com">
+                <div>
+                    <div class="module-icon">🧠</div>
+                    <div class="module-name">智能工具</div>
+                    <div class="module-description">AI驱动的智能分析和优化，助力企业决策升级</div>
+                </div>
+                <button class="module-action">进入系统</button>
+            </div>
+
+            <!-- 预测工具 -->
+            <div class="module-card" data-module="预测工具" data-url="https://www.alipay.com">
+                <div>
+                    <div class="module-icon">📊</div>
+                    <div class="module-name">预测工具</div>
+                    <div class="module-description">基于大数据的趋势预测，赋能精细化管理</div>
+                </div>
+                <button class="module-action">进入系统</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>电力产品组 · 智慧能源演示版 v3.0 | © 2026 电科院用能所 | 数据驱动 智领未来</p>
+    </div>
+
+    <!-- 加载动画遮罩 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">
+            <div class="loader-text">系统跳转中</div>
+        </div>
+    </div>
+
+    <script>
+        // 生成星星背景
+        function generateStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            starsContainer.innerHTML = '';
+            const starCount = window.innerWidth > 768 ? 150 : 80;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = 2 + Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // 初始化星星
+        generateStars();
+
+        // 鼠标跟随光效
+        document.addEventListener('mousemove', function(e) {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            const light = document.createElement('div');
+            light.style.position = 'fixed';
+            light.style.left = e.clientX + 'px';
+            light.style.top = e.clientY + 'px';
+            light.style.width = '30px';
+            light.style.height = '30px';
+            light.style.background = 'radial-gradient(circle, rgba(0, 216, 255, 0.4), transparent)';
+            light.style.borderRadius = '50%';
+            light.style.pointerEvents = 'none';
+            light.style.zIndex = '1';
+            light.style.animation = 'fadeOut 0.6s ease-out forwards';
+            document.body.appendChild(light);
+            
+            setTimeout(() => light.remove(), 600);
+        });
+
+        // 添加淡出动画
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: scale(1); }
+                to { opacity: 0; transform: scale(1.5); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 响应式：窗口大小改变时重新生成星星
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            if (resizeTimer) clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                generateStars();
+            }, 200);
+        });
+
+        // 显示加载动画并跳转
+        function showLoadingAnimation(moduleName, url) {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.add('active');
+
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                console.log(`[系统跳转] 正在进入 ${moduleName} 系统`);
+                console.log(`[时间] ${new Date().toLocaleString('zh-CN')}`);
+                console.log(`[目标地址] ${url}`);
+                if (url && url !== '#') {
+                    window.open(url, '_blank');
+                }
+            }, 1000);
+        }
+
+        // 卡片点击事件
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.classList && e.target.classList.contains('module-action')) {
+                    return;
+                }
+                const moduleName = this.getAttribute('data-module');
+                const url = this.getAttribute('data-url');
+                if (moduleName && url) {
+                    showLoadingAnimation(moduleName, url);
+                }
+            });
+        });
+
+        // 按钮独立点击事件
+        document.querySelectorAll('.module-action').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.module-card');
+                if (card) {
+                    const moduleName = card.getAttribute('data-module');
+                    const url = card.getAttribute('data-url');
+                    if (moduleName && url) {
+                        showLoadingAnimation(moduleName, url);
+                    }
+                }
+            });
+        });
+
+        console.log('🚀 电科院用能所数字产品矩阵已启动 | v3.0 增强科技感版本');
+    </script>
+</body>
+</html>
